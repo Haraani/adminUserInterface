@@ -147,8 +147,8 @@ const MembersTable = () => {
         getData(newData);
         getEditingKey('');
       }
-    } catch (errInfo) {
-      console.log('Validate Failed:', errInfo);
+    } catch (error) {
+      console.log('Failed to add new row:', error);
     }
   };
 
