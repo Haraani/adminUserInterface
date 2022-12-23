@@ -110,6 +110,8 @@ const MembersTable = () => {
     };
     fetchData();
   }, []);
+
+  // Editing 
   const liveEditing = (record) => record.key === editingKey;
 
   const edit = (record) => {
@@ -121,6 +123,8 @@ const MembersTable = () => {
     });
     setEditingKey(record.key);
   };
+
+  //Close Editing
 
   const exit = () => {
     setEditingKey('');
@@ -149,19 +153,19 @@ const MembersTable = () => {
 
   const columnNames = [
     {
-      title: 'Name',
+      title: 'Full Name',
       dataIndex: 'name',
       width: '30%',
       editable: true,
     },
     {
-      title: 'Email',
+      title: 'Email Address',
       dataIndex: 'email',
       width: '30%',
       editable: true,
     },
     {
-      title: 'Role',
+      title: 'Role / Position',
       dataIndex: 'role',
       width: '20%',
       editable: true,
@@ -240,11 +244,14 @@ const MembersTable = () => {
 
   return (
     <div className="members">
+      <div className='searchBar'>
       <Search
         placeholder="Enter the Name, Email or Role to be searched"
         onChange={onSearchHandler}
         enterButton
       />
+      </div>
+      <div className='form'>
       <Form form={form} component={false}>
         <Table
           components={{
@@ -264,6 +271,7 @@ const MembersTable = () => {
           }}
         />
       </Form>
+      </div>
       {selectedData.length > 0 && (
         <Button
           type="primary"
