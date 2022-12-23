@@ -207,7 +207,7 @@ const MembersTable = () => {
                 disabled={editingKey !== ''}
                 onClick={() => removeId(record.id)}
               >
-                <PersonRemoveTwoTone twoToneColor="#eb2f96" />
+                <PersonRemoveTwoTone twoToneColor="#ff0000" />
               </Typography.Link>
             </div>
           </>
