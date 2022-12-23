@@ -184,16 +184,16 @@ const MembersTable = () => {
               <span>
                 <a
                   href="/#"
-                  onClick={() => save(record.key)}
+                  onClick={() => save(record.key)}  // Saves the editing changes
                   style={{
-                    marginRight: 8,
+                    marginRight: 8,    // space between save and exir options
                   }}
                 >
                   Save
-                </a>
-                <Popconfirm title="Exit" onConfirm={exit}>
+                </a> 
+                <Popconfirm title="Exit" onConfirm={exit}>   
                   <a href="/#">Exit</a>
-                </Popconfirm>
+                </Popconfirm>  
               </span>
             ) : (
               <Typography.Link
