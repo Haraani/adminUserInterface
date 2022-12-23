@@ -53,8 +53,8 @@ const EditCell = ({
 
 const MembersTable = () => {
   const [form] = Form.useForm();
-  let [data, setData] = useState(sourceData);
-  const [editingKey, setEditingKey] = useState('');
+  let [data, getData] = useState(sourceData);
+  const [editingKey, getEditingKey] = useState('');
 
   const [filter, setFilter] = useState('');
 
@@ -74,7 +74,7 @@ const MembersTable = () => {
     data = data.filter((item) => {
       return item.id !== id;
     });
-    setData(data);
+    getData(data);
   };
 
   // Removing Data
@@ -84,26 +84,26 @@ const MembersTable = () => {
     data = data.filter((item) => {
       return !idArray.includes(item.id);
     });
-    setData(data);
+    getData(data);
     setSelectedData([]);
   };
 
   // getting from the API
-  const [loading, setLoading] = useState(false);
+  const [loading, getLoading] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true);
+        getLoading(true);
         let { data } = await axios.get(URL);
         data = data.map((item) => {
           var temp = Object.assign({}, item);
           temp.key = item.id;
           return temp;
         });
-        setData(data);
-        setLoading(false);
+        getData(data);
+        getLoading(false);
       } catch (error) {
-        setLoading(false);
+        getLoading(false);
         console.log(error);
         openNotificationWithIcon('error', error.message);
       }
@@ -121,14 +121,15 @@ const MembersTable = () => {
       address: '',
       ...record,
     });
-    setEditingKey(record.key);
+    getEditingKey(record.key);
   };
 
-  //Close Editing
-
+  //Exit Editing
   const exit = () => {
-    setEditingKey('');
+    getEditingKey('');
   };
+
+  //Save the edited Record
 
   const save = async (key) => {
     try {
@@ -139,12 +140,12 @@ const MembersTable = () => {
       if (index > -1) {
         const item = newData[index];
         newData.splice(index, 1, { ...item, ...newRow });
-        setData(newData);
-        setEditingKey('');
+        getData(newData);
+        getEditingKey('');
       } else {
         newData.push(newRow);
-        setData(newData);
-        setEditingKey('');
+        getData(newData);
+        getEditingKey('');
       }
     } catch (errInfo) {
       console.log('Validate Failed:', errInfo);
@@ -190,8 +191,8 @@ const MembersTable = () => {
                 >
                   Save
                 </a>
-                <Popconfirm title="Cancel" onConfirm={exit}>
-                  <a href="/#">Cancel</a>
+                <Popconfirm title="Exit" onConfirm={exit}>
+                  <a href="/#">Exit</a>
                 </Popconfirm>
               </span>
             ) : (
